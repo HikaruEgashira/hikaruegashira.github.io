@@ -1,5 +1,3 @@
-import './style.css'
-
 new window.V86({
     wasm_path: "/libs/v86/v86.wasm",
     //Hell is this?
