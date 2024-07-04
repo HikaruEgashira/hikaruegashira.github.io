@@ -1,7 +1,7 @@
 import './style.css'
 
 new window.V86({
-    wasm_path: "./libs/v86/v86.wasm",
+    wasm_path: "/libs/v86/v86.wasm",
     //Hell is this?
     acpi: false,
     //Log level, debugging?
@@ -42,13 +42,13 @@ new window.V86({
 
     screen_container: document.getElementById("canvas"),
     bios: {
-        url: "./libs/v86/bios/seabios.bin",
+        url: "/libs/v86/bios/seabios.bin",
     },
     vga_bios: {
-        url: "./libs/v86/bios/vgabios.bin",
+        url: "/libs/v86/bios/vgabios.bin",
     },
     bzimage: {
-        url: "./libs/v86/images/buildroot-bzimage.bin",
+        url: "/libs/v86/images/buildroot-bzimage.bin",
     },
     autostart: true,
 });
