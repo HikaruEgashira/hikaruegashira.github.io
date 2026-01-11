@@ -20,3 +20,9 @@ RUN : > /etc/issue
 RUN mkdir -p /var/log && touch /var/log/wtmp /var/log/lastlog
 
 RUN mkinitfs -F "base virtio 9p" $(cat /usr/share/kernel/$KERNEL/kernel.release)
+
+# Pleno scripts
+RUN mkdir -p /root
+RUN printf '#!/bin/sh\nprintf "\\033]1337;open=https://plenoai.com/pleno-audit/\\007"\n' > /root/pleno-audit && chmod +x /root/pleno-audit
+RUN printf '#!/bin/sh\nprintf "\\033]1337;open=https://plenoai.com/pleno-anonymize/\\007"\n' > /root/pleno-anonymize && chmod +x /root/pleno-anonymize
+RUN printf '#!/bin/sh\nprintf "\\033]1337;open=https://plenoai.com/pleno-transcribe/\\007"\n' > /root/pleno-transcribe && chmod +x /root/pleno-transcribe

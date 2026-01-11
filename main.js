@@ -70,8 +70,48 @@ const emulator = new window.V86({
     autostart: true,
 });
 
+// OSC sequence parser for custom commands (e.g., ]1337;open=URL)
+let oscBuffer = "";
+let inOsc = false;
+
 emulator.add_listener("serial0-output-byte", (byte) => {
-    term.write(String.fromCharCode(byte));
+    const char = String.fromCharCode(byte);
+
+    if (byte === 0x1b) {
+        // ESC - might start OSC
+        oscBuffer = "\x1b";
+        return;
+    }
+
+    if (oscBuffer === "\x1b" && char === "]") {
+        // ESC ] - start of OSC
+        inOsc = true;
+        oscBuffer = "";
+        return;
+    }
+
+    if (inOsc) {
+        if (byte === 0x07) {
+            // BEL - end of OSC, process command
+            const match = oscBuffer.match(/^1337;open=(.+)$/);
+            if (match) {
+                window.open(match[1], "_blank");
+            }
+            oscBuffer = "";
+            inOsc = false;
+            return;
+        }
+        oscBuffer += char;
+        return;
+    }
+
+    // Reset if not part of sequence
+    if (oscBuffer) {
+        term.write(oscBuffer);
+        oscBuffer = "";
+    }
+
+    term.write(char);
 });
 
 term.onData((data) => {
