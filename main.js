@@ -47,7 +47,6 @@ const emulator = new window.V86({
     uart1: true,
     uart2: false,
     uart3: false,
-    cmdline: null,
     preserve_mac_from_state_image: true,
     network_adapter: null,
     network_relay_url: null,
@@ -55,7 +54,7 @@ const emulator = new window.V86({
     disable_mouse: true,
     screen_dummy: true,
     disable_speaker: true,
-    bzimage_initrd_from_filesystem: false,
+    bzimage_initrd_from_filesystem: true,
     virtio_console: false,
     bios: {
         url: "/libs/v86/bios/seabios.bin",
@@ -63,22 +62,16 @@ const emulator = new window.V86({
     vga_bios: {
         url: "/libs/v86/bios/vgabios.bin",
     },
-    bzimage: {
-        url: "/libs/v86/images/buildroot-bzimage.bin",
+    filesystem: {
+        baseurl: "/libs/v86/images/alpine-rootfs-flat/",
+        basefs: "/libs/v86/images/alpine-fs.json",
     },
+    cmdline: "rw root=host9p rootfstype=9p rootflags=trans=virtio,cache=loose modules=virtio_pci tsc=reliable console=ttyS0 quiet",
     autostart: true,
 });
 
-let ready = false;
 emulator.add_listener("serial0-output-byte", (byte) => {
-    const char = String.fromCharCode(byte);
-    if (!ready && char === "%") {
-        ready = true;
-        setTimeout(() => {
-            emulator.serial0_send("clear\n");
-        }, 100);
-    }
-    term.write(char);
+    term.write(String.fromCharCode(byte));
 });
 
 term.onData((data) => {
