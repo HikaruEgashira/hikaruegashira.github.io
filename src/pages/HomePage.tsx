@@ -105,23 +105,24 @@ const HeroSection: React.FC = () => {
 const ProductsSection: React.FC = () => {
   const products = [
     {
-      title: 'pleno-anonymize',
-      description: 'PII anonymization API. Detect and safely mask personal information.',
-      githubUrl: 'https://github.com/HikaruEgashira/pleno-anonymize',
-      websiteUrl: 'https://hikaruegashira.github.io/pleno-anonymize/',
-      icon: <Shield className="w-5 h-5 text-zinc-100" />,
-    },
-    {
-      title: 'pleno-audit',
-      description: 'Code audit tool. Quietly, reliably watching over your code.',
+      title: 'Pleno Audit',
+      description: 'Personal Browser Security',
       githubUrl: 'https://github.com/HikaruEgashira/pleno-audit',
       websiteUrl: 'https://hikaruegashira.github.io/pleno-audit/',
       icon: <FileSearch className="w-5 h-5 text-zinc-100" />,
     },
     {
-      title: 'pleno-transcribe',
-      description: 'Transcription app. Voice to text, quietly.',
+      title: 'Pleno Anonymize',
+      description: 'PII Filter Backend Service',
+      githubUrl: 'https://github.com/HikaruEgashira/pleno-anonymize',
+      websiteUrl: 'https://hikaruegashira.github.io/pleno-anonymize/',
+      icon: <Shield className="w-5 h-5 text-zinc-100" />,
+    },
+    {
+      title: 'Pleno Transcribe',
+      description: 'OSS Plaude Note Pro Alternative',
       githubUrl: 'https://github.com/HikaruEgashira/pleno-transcribe',
+      websiteUrl: 'https://hikaruegashira.github.io/pleno-transcribe/',
       icon: <Mic className="w-5 h-5 text-zinc-100" />,
     },
   ];
