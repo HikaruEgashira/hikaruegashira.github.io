@@ -78,7 +78,7 @@ const HeroSection: React.FC = () => {
           className="space-y-6"
         >
           <h1 className="text-5xl md:text-7xl font-light text-zinc-100 tracking-tight">
-            Pleno
+            Pleno Project
           </h1>
 
           <motion.div
