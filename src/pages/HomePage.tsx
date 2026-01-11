@@ -138,7 +138,7 @@ const ProductsSection: React.FC = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-light text-zinc-100 mb-4">Products</h2>
-          <p className="text-zinc-400 text-lg">Just right, over feature-rich. Calm, over fast. Lasting, over novel.</p>
+          <p className="text-zinc-400 text-lg">Developing OSS privacy-first AI software.</p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
