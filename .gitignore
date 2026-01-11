@@ -1,1 +1,4 @@
 alpine-rootfs.tar
+node_modules
+dist
+assets
