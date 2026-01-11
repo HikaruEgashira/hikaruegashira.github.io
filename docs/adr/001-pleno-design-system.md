@@ -6,7 +6,7 @@ Accepted
 
 ## Context
 
-Pleno Projectの紹介ページを構築するにあたり、既存のPleno製品群（pleno-anonymize、pleno-audit、pleno-transcribe）との統一感を保つデザインシステムが必要。
+Pleno Projectの紹介ページを構築するにあたり、既存のPleno製品群（pleno-anonymize、pleno-audit、pleno-live）との統一感を保つデザインシステムが必要。
 
 ### Plenoの思想
 

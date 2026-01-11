@@ -119,10 +119,10 @@ const ProductsSection: React.FC = () => {
       icon: <Shield className="w-5 h-5 text-zinc-100" />,
     },
     {
-      title: 'Pleno Transcribe',
-      description: 'OSS Plaude Note Pro Alternative',
-      githubUrl: 'https://github.com/HikaruEgashira/pleno-transcribe',
-      websiteUrl: 'https://hikaruegashira.github.io/pleno-transcribe/',
+      title: 'Pleno Live',
+      description: 'OSS Plaud Note Pro Alternative',
+      githubUrl: 'https://github.com/HikaruEgashira/pleno-live',
+      websiteUrl: 'https://hikaruegashira.github.io/pleno-live/',
       icon: <Mic className="w-5 h-5 text-zinc-100" />,
     },
   ];
@@ -155,7 +155,7 @@ const Footer: React.FC = () => {
   const products = [
     { name: 'Anonymize', privacyUrl: 'https://hikaruegashira.github.io/pleno-anonymize/privacy', termsUrl: 'https://hikaruegashira.github.io/pleno-anonymize/terms' },
     { name: 'Audit', privacyUrl: 'https://hikaruegashira.github.io/pleno-audit/privacy', termsUrl: 'https://hikaruegashira.github.io/pleno-audit/terms' },
-    { name: 'Transcribe', privacyUrl: 'https://hikaruegashira.github.io/pleno-transcribe/privacy', termsUrl: 'https://hikaruegashira.github.io/pleno-transcribe/terms' },
+    { name: 'Live', privacyUrl: 'https://hikaruegashira.github.io/pleno-live/privacy', termsUrl: 'https://hikaruegashira.github.io/pleno-live/terms' },
   ];
 
   return (
