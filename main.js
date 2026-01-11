@@ -1,44 +1,62 @@
-new window.V86({
+const term = new Terminal({
+    cursorBlink: true,
+    convertEol: true,
+    fontFamily: "'JetBrains Mono', 'Fira Code', 'SF Mono', Menlo, Monaco, 'Courier New', monospace",
+    fontSize: 14,
+    letterSpacing: 0,
+    lineHeight: 1.2,
+    theme: {
+        background: "#1a1b26",
+        foreground: "#a9b1d6",
+        cursor: "#c0caf5",
+        cursorAccent: "#1a1b26",
+        selectionBackground: "#33467c",
+        black: "#32344a",
+        red: "#f7768e",
+        green: "#9ece6a",
+        yellow: "#e0af68",
+        blue: "#7aa2f7",
+        magenta: "#ad8ee6",
+        cyan: "#449dab",
+        white: "#787c99",
+        brightBlack: "#444b6a",
+        brightRed: "#ff7a93",
+        brightGreen: "#b9f27c",
+        brightYellow: "#ff9e64",
+        brightBlue: "#7da6ff",
+        brightMagenta: "#bb9af7",
+        brightCyan: "#0db9d7",
+        brightWhite: "#acb0d0",
+    },
+});
+const fitAddon = new FitAddon.FitAddon();
+term.loadAddon(fitAddon);
+term.open(document.getElementById("terminal"));
+fitAddon.fit();
+
+window.addEventListener("resize", () => fitAddon.fit());
+
+const emulator = new window.V86({
     wasm_path: "/libs/v86/v86.wasm",
-    //Hell is this?
     acpi: false,
-    //Log level, debugging?
     log_level: 0,
-    //128MB of ram
     memory_size: 128 * 1024 * 1024,
-    //8MB of video ram
     vga_memory_size: 8 * 1024 * 1024,
-    //CD / Floppy / HD
     boot_order: 0x213,
-    //Skips boot menu delay on boch BIOS apparently
     fastboot: true,
-    //From my understanding, these control serial terminals
-    uart1: false, //Terminal
-    uart2: false, //Screen
-    uart3: false, //Controller
-    //Used for weird ass automatic kernel image loading
+    uart1: true,
+    uart2: false,
+    uart3: false,
     cmdline: null,
-    //Presumably saves the mac address in the state
     preserve_mac_from_state_image: true,
-    //Instance of NetworkAdapter
     network_adapter: null,
-    //URL to websocket proxy (wss://relay.widgetry.org/)
     network_relay_url: null,
-    disable_keyboard: false,
-    disable_mouse: false,
-    //Canvas element
-    screen_container: null,
-    //Fake screen
-    screen_dummy: false,
-    //Textarea element
-    serial_container: null,
-    //Div element
-    serial_container_xtermjs: null,
+    disable_keyboard: true,
+    disable_mouse: true,
+    screen_dummy: true,
     disable_speaker: true,
     bzimage_initrd_from_filesystem: false,
-    virtio_console: true,
-
-    screen_container: document.getElementById("canvas"),
+    virtio_console: false,
     bios: {
         url: "/libs/v86/bios/seabios.bin",
     },
@@ -49,4 +67,20 @@ new window.V86({
         url: "/libs/v86/images/buildroot-bzimage.bin",
     },
     autostart: true,
+});
+
+let ready = false;
+emulator.add_listener("serial0-output-byte", (byte) => {
+    const char = String.fromCharCode(byte);
+    if (!ready && char === "%") {
+        ready = true;
+        setTimeout(() => {
+            emulator.serial0_send("clear\n");
+        }, 100);
+    }
+    term.write(char);
+});
+
+term.onData((data) => {
+    emulator.serial0_send(data);
 });
