@@ -37,7 +37,7 @@ fitAddon.fit();
 window.addEventListener("resize", () => fitAddon.fit());
 
 const emulator = new window.V86({
-    wasm_path: "/libs/v86/v86.wasm",
+    wasm_path: "./libs/v86/v86.wasm",
     acpi: false,
     log_level: 0,
     memory_size: 128 * 1024 * 1024,
@@ -57,14 +57,14 @@ const emulator = new window.V86({
     bzimage_initrd_from_filesystem: true,
     virtio_console: false,
     bios: {
-        url: "/libs/v86/bios/seabios.bin",
+        url: "./libs/v86/bios/seabios.bin",
     },
     vga_bios: {
-        url: "/libs/v86/bios/vgabios.bin",
+        url: "./libs/v86/bios/vgabios.bin",
     },
     filesystem: {
-        baseurl: "/libs/v86/images/alpine-rootfs-flat/",
-        basefs: "/libs/v86/images/alpine-fs.json",
+        baseurl: "./libs/v86/images/alpine-rootfs-flat/",
+        basefs: "./libs/v86/images/alpine-fs.json",
     },
     cmdline: "rw root=host9p rootfstype=9p rootflags=trans=virtio,cache=loose modules=virtio_pci tsc=reliable console=ttyS0 quiet",
     autostart: true,
